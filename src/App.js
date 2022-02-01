@@ -1,5 +1,6 @@
 import './App.css';
 import ForgotPass from './pages/forgot-password/ForgotPass';
+import ResetPass from './pages/reset-password/ResetPass';
 import SignIn from './pages/signin/SignIn';
 import SignUp from './pages/signup/SignUp';
 
@@ -8,7 +9,8 @@ function App() {
     <div className="App">
       {/* <SignUp /> */}
       {/* <SignIn /> */}
-      <ForgotPass />
+      {/* <ForgotPass /> */}
+      <ResetPass />
     </div>
   );
 }
