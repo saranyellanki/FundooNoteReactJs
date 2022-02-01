@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans&family=Open+Sans&family=Roboto:wght@400&display=swap');
+
+body {
+  font-family: 'DM Sans', sans-serif;  
+}
+
+.m-container {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  padding-top: 8%;
+}
+
+.item-container {
+  width: 28%;
+  border: 1px solid #c2c2c2;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 65%;
+  @media(max-width:900px) {
+      width: 60%;
+  }
+  @media(max-width: 550px) {
+      width: 100%;
+  }
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 20px;
+}
+
+.row-pass {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 5px;
+}
+
+.main-container {
+  width: 80%;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  @media(max-width:1400px) {
+      width: 70%;
+  }
+}
+
+.l-row-in {
+  width: 100%;
+  padding-top: 5px;
+}
+
+.title-sign-in {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  height: 70px;
+}
+
+.msg-sign-in {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding-bottom: 30px;
+}
+
+.title-sign-in p {
+  font-size: x-large;
+  font-weight: 600;
+}
+
+.msg-sign-in span {
+  font-size: x-large;
+  font-weight: 50;
+}
+
+.btn-cont {
+  width: 100%;
+  display: flex;
+  padding-top: 20px;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+}
+
+.forgot-email {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.forgot-email p {
+  font-size: 15px;
+  font-weight: 500;
+  color: #1a73e8;
+}
+
+.forgot-email p:hover {
+  cursor: pointer;
+  background-color: #eef1fd;
+  border-radius: 3px;
+  color: rgb(41, 62, 153);
+}
+
+.btn-cont button {
+  background-color: #1e7cf7;
+  font-weight: 600;
+  color: #fff;
+  width: 80px;
+  height: 40px;
+  border: none;
+  border-radius: 5px;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.btn-cont p {
+  font-size: 15px;
+  font-weight: 500;
+  color: #1a73e8;
+}
+
+.btn-cont button:hover {
+  cursor: pointer;
+  background-color: #0a6ef1;
+}
+
+.btn-cont p:hover {
+  cursor: pointer;
+  background-color: #eef1fd;
+  border-radius: 3px;
+  color: rgb(41, 62, 153);
+}
