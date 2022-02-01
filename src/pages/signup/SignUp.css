@@ -1,0 +1,164 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans&family=Open+Sans&family=Roboto:wght@400&display=swap');
+
+body {
+    font-family: 'DM Sans', sans-serif;  
+}
+
+.container {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    height: 100vh;
+}
+.items-container {
+    width: 47%;
+    border: 1px solid rgb(194, 194, 194);
+    border-radius: 10px;
+    height: 75vh;
+    display: flex;
+}
+
+.row-name {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 20px;
+}
+
+.row-pass {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 5px;
+}
+
+.row-button {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 0px 20px 0px;
+}
+
+.row-username {
+    display: flex;
+    justify-content: space-between;
+    height: 50px;
+}
+
+.username {
+    width: 100%;
+}
+
+.left-container {
+    width: 55%;
+    height: 100%;
+    padding: 20px;
+    padding-left: 40px;
+}
+
+.right-container {
+    width: 45%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.l-row {
+    width: 48%;
+    padding-top: 5px;
+}
+
+.logo p {
+    font-weight: 100;
+    font-size: medium;
+    color: rgb(63, 63, 63);
+}
+
+.title {
+    display: flex;
+    justify-content: start;
+    height: 65px;
+}
+
+.msg {
+    display: flex;
+    justify-content: start;
+    padding-bottom: 30px;
+}
+
+.title p {
+    font-size: x-large;
+    font-weight: 600;
+}
+
+.msg span {
+    font-size: x-large;
+    font-weight: 50;
+}
+
+.myEmail {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    font-size: small;
+    font-weight: 500;
+    color: #1a73e8;
+    height: 70px;
+}
+
+.myEmail :hover {
+    cursor: pointer;
+    border-radius: 5px; 
+    background-color: #e7e9f3;
+    color: rgb(41, 62, 153);
+}
+
+.btn-container {
+    width: 100%;
+    display: flex;
+    padding-top: 20px;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+}
+
+.btn-container button {
+    background-color: #1e7cf7;
+    font-weight: 600;
+    color: #fff;
+    width: 80px;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    font-family: 'DM Sans', sans-serif;
+}
+
+.btn-container p {
+    font-size: small;
+    font-weight: 500;
+    color: #1a73e8;
+}
+
+.btn-container button:hover {
+    cursor: pointer;
+    background-color: #0a6ef1;
+}
+
+.btn-container p:hover {
+    cursor: pointer;
+    background-color: #eef1fd;
+    border-radius: 3px;
+    color: rgb(41, 62, 153);
+}
+
+.checkbox {
+    display: flex;
+    justify-self: start;
+    height: 45px;
+}
+
+.helperText{
+    display: flex;
+    justify-content: start;
+    padding-left: 15px;
+	font-family: sans-serif;
+	font-size: 12px;
+	color: rgb(105, 105, 105);
+}
