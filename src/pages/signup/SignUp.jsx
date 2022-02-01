@@ -1,13 +1,23 @@
 import React from 'react';
 import { Checkbox, FormControlLabel, TextField } from '@mui/material';
-import './SignUp.css'
+import './SignUp.scss'
 
 class SignUp extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
+            type:"password"
         };
+    }
+
+    showPassword = (event) => {
+        event.target.checked ? 
+        this.setState({
+            type:"text"
+        }) : this.setState({
+            type:"password" 
+        })
     }
 
     render() {
@@ -39,8 +49,8 @@ class SignUp extends React.Component {
                             <p>Use my current email address instead</p>
                         </div>
                         <div className='row-pass'>
-                            <div className='l-row'><TextField id="outlined-basic" label="Password" size='small' fullWidth variant="outlined" /></div>
-                            <div className='l-row'><TextField id="outlined-basic" label="Confirm" size='small' fullWidth variant="outlined" /></div>
+                            <div className='l-row'><TextField type={this.state.type} id="outlined-basic" label="Password" size='small' fullWidth variant="outlined" /></div>
+                            <div className='l-row'><TextField type={this.state.type} id="outlined-basic" label="Confirm" size='small' fullWidth variant="outlined" /></div>
                         </div>
                         <div className="helperText">
                             <span>
@@ -48,7 +58,7 @@ class SignUp extends React.Component {
                             </span>
                         </div>
                         <div className='checkbox'>
-                            <FormControlLabel control={<Checkbox />} label="Show Password" />
+                            <FormControlLabel control={<Checkbox onChange={this.showPassword} />} label="Show Password" />
                         </div>
                         <div className='row-button'>
                             <div className='btn-container'>
