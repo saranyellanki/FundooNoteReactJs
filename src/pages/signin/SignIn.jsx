@@ -7,8 +7,39 @@ class SignIn extends React.Component {
     super(props);
 
     this.state = {
+      email: '',
+      password: '',
+      emailError: false,
+      passwordError: false,
       type: "password"
     };
+  }
+
+  changeState = (event) => {
+    this.setState({
+      [event.target.name]: event.target.value
+    })
+  }
+
+  validation = () => {
+    let isError = false;
+    const error = this.state;
+    error.emailError = this.state.email === '' ? true : false;
+    error.passwordError = this.state.password === '' ? true : false;
+
+    this.setState({
+      ...error
+    })
+
+    isError = error.emailError || error.passwordError
+    return isError;
+  }
+
+  next = () => {
+    let isValidated = this.validation();
+    if (!isValidated) {
+      console.log("Navigate");
+    }
   }
 
   showPassword = (event) => {
@@ -40,10 +71,29 @@ class SignIn extends React.Component {
               <p>Use your Fundoo Account</p>
             </div>
             <div className='row'>
-              <div className='l-row-in'><TextField id="outlined-basic" label="Email" size='medium' fullWidth variant="outlined" /></div>
+              <div className='l-row-in'><TextField 
+              id="outlined-basic" 
+              name='email'
+              label="Email" 
+              size='medium' 
+              fullWidth 
+              variant="outlined"
+              error={this.state.emailError}
+              helperText={this.state.emailError ? "Email is required" : ''}
+              onChange={(event) => this.changeState(event)} /></div>
             </div>
             <div className='row-pass'>
-              <div className='l-row-in'><TextField type={this.state.type} id="outlined-basic" label="Password" size='medium' fullWidth variant="outlined" /></div>
+              <div className='l-row-in'><TextField 
+              type={this.state.type} 
+              id="outlined-basic" 
+              label="Password" 
+              name='password'
+              size='medium' 
+              fullWidth 
+              variant="outlined"
+              error={this.state.passwordError}
+              helperText={this.state.passwordError ? "Password is required" : ''}
+              onChange={(event) => this.changeState(event)} /></div>
             </div>
             <div className='checkbox'>
               <FormControlLabel control={<Checkbox onChange={this.showPassword} />} label="Show Password" />
@@ -55,7 +105,7 @@ class SignIn extends React.Component {
             </div>
             <div className='row'>
               <div className='btn-cont'>
-                <button>Next</button>
+                <button onClick={this.next}>Next</button>
                 <p>Create Account</p>
               </div>
             </div>
