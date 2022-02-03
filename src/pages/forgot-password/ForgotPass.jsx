@@ -2,12 +2,40 @@ import React from 'react';
 import { TextField } from '@mui/material';
 import './ForgotPass.scss'
 
-class SignIn extends React.Component {
+class ForgotPass extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      email: '',
+      emailError: false
     };
+  }
+
+  changeState = (event) => {
+    this.setState({
+      [event.target.name]: event.target.value
+    })
+  }
+
+  validation = () => {
+    let isError = false;
+    const error = this.state;
+    error.emailError = this.state.email === '' ? true : false;
+
+    this.setState({
+      ...error
+    })
+
+    isError = error.emailError
+    return isError;
+  }
+
+  next = () => {
+    let isValidated = this.validation();
+    if (!isValidated) {
+      console.log("Navigate");
+    }
   }
 
   render() {
@@ -30,11 +58,20 @@ class SignIn extends React.Component {
               <p>Enter your recovery email</p>
             </div>
             <div className='row'>
-              <div className='l-row-in'><TextField id="outlined-basic" label="Email" size='medium' fullWidth variant="outlined" /></div>
+              <div className='l-row-in'><TextField
+                id="outlined-basic"
+                label="Email"
+                name='email'
+                size='medium'
+                fullWidth
+                variant="outlined"
+                error={this.state.emailError}
+                helperText={this.state.emailError ? "Email is required" : ''}
+                onChange={(event) => this.changeState(event)} /></div>
             </div>
             <div className='row'>
               <div className='btn-cont'>
-                <button>Next</button>
+                <button onClick={this.next}>Next</button>
               </div>
             </div>
           </div>
@@ -44,4 +81,4 @@ class SignIn extends React.Component {
   }
 }
 
-export default SignIn;
+export default ForgotPass;
