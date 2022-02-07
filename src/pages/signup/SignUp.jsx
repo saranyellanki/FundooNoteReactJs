@@ -84,7 +84,7 @@ class SignUp extends React.Component {
                             name='firstName'
                             label="First name" 
                             error={this.state.firstNameError}
-                            helperText={this.state.firstNameError ? "First Name is required" : ''}
+                            helperText={this.state.firstNameError ? "First Name is required" : ' '}
                             onChange={(event) => this.changeState(event)} 
                             size='small' fullWidth variant="outlined" /></div>
                             <div className='l-row'><TextField 
@@ -95,7 +95,7 @@ class SignUp extends React.Component {
                             fullWidth 
                             variant="outlined"
                             error={this.state.lastNameError}
-                            helperText={this.state.lastNameError ? "Last Name is required" : ''}
+                            helperText={this.state.lastNameError ? "Last Name is required" : ' '}
                             onChange={(event) => this.changeState(event)} /></div>
                         </div>
                         <div className='row-username'>
@@ -108,7 +108,7 @@ class SignUp extends React.Component {
                             size='small' 
                             variant="outlined"
                             error={this.state.emailError}
-                            helperText={this.state.emailError ? "Email is required" : ''}
+                            helperText={this.state.emailError ? "Email is required" : 'You can use letter, numbers & periods'}
                             onChange={(event) => this.changeState(event)} /></div>
                         </div>
                         <div className="myEmail">
@@ -124,7 +124,7 @@ class SignUp extends React.Component {
                             fullWidth 
                             variant="outlined"
                             error={this.state.passwordError}
-                            helperText={this.state.passwordError ? "Password is required" : ''}
+                            helperText={this.state.passwordError ? "Password is required" : ' '}
                             onChange={(event) => this.changeState(event)} /></div>
                             <div className='l-row'><TextField 
                             type={this.state.type} 
@@ -135,7 +135,7 @@ class SignUp extends React.Component {
                             fullWidth 
                             variant="outlined"
                             error={this.state.confirmError}
-                            helperText={this.state.confirmError ? "Confirm password is required" : ''}
+                            helperText={this.state.confirmError ? "Confirm is required" : ' '}
                             onChange={(event) => this.changeState(event)} /></div>
                         </div>
                         <div className="helperText">
