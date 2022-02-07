@@ -71,29 +71,29 @@ class SignIn extends React.Component {
               <p>Use your Fundoo Account</p>
             </div>
             <div className='row'>
-              <div className='l-row-in'><TextField 
-              id="outlined-basic" 
-              name='email'
-              label="Email" 
-              size='medium' 
-              fullWidth 
-              variant="outlined"
-              error={this.state.emailError}
-              helperText={this.state.emailError ? "Email is required" : ''}
-              onChange={(event) => this.changeState(event)} /></div>
+              <div className='l-row-in'><TextField
+                id="outlined-basic"
+                name='email'
+                label="Email"
+                size='medium'
+                fullWidth
+                variant="outlined"
+                error={this.state.emailError}
+                helperText={this.state.emailError ? "Email is required" : ''}
+                onChange={(event) => this.changeState(event)} /></div>
             </div>
             <div className='row-pass'>
-              <div className='l-row-in'><TextField 
-              type={this.state.type} 
-              id="outlined-basic" 
-              label="Password" 
-              name='password'
-              size='medium' 
-              fullWidth 
-              variant="outlined"
-              error={this.state.passwordError}
-              helperText={this.state.passwordError ? "Password is required" : ''}
-              onChange={(event) => this.changeState(event)} /></div>
+              <div className='l-row-in'><TextField
+                type={this.state.type}
+                id="outlined-basic"
+                label="Password"
+                name='password'
+                size='medium'
+                fullWidth
+                variant="outlined"
+                error={this.state.passwordError}
+                helperText={this.state.passwordError ? "Password is required" : ''}
+                onChange={(event) => this.changeState(event)} /></div>
             </div>
             <div className='checkbox'>
               <FormControlLabel control={<Checkbox onChange={this.showPassword} />} label="Show Password" />
