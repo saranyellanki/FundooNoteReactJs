@@ -26,6 +26,7 @@ import { alpha } from "@mui/material";
 import { AccountCircleOutlined, AppsOutlined, RefreshOutlined, SettingsOutlined, ViewStreamOutlined } from "@mui/icons-material";
 import './Dashboard.scss'
 import TakeNote from "../../components/takeNote/TakeNote";
+import DisplayNote from "../../components/displayNote/DisplayNote";
 
 
 const drawerWidth = 240;
@@ -224,6 +225,7 @@ export default function MiniDrawer() {
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
         <TakeNote />
+        <DisplayNote />
       </Box>
     </Box>
   );
