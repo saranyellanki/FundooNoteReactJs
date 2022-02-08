@@ -1,6 +1,9 @@
 import React from 'react';
 import { TextField, FormControlLabel, Checkbox } from '@mui/material';
 import './ResetPass.scss'
+import UserService from '../../service/UserService';
+
+const userService = new UserService();
 
 class ResetPass extends React.Component {
   constructor(props) {
@@ -37,8 +40,17 @@ class ResetPass extends React.Component {
 
   next = () => {
     let isValidated = this.validation();
+    let data = {
+      "password": this.state.password
+    }
+
     if (!isValidated) {
-      console.log("Navigate");
+      userService.ResetPassword(data)
+        .then((res) => {
+          console.log(res.data);
+        }).catch((err) => {
+          console.log(err);
+        })
     }
   }
 
@@ -71,30 +83,30 @@ class ResetPass extends React.Component {
               <p>Enter your Password</p>
             </div>
             <div className='row-pass'>
-              <div className='l-row-in'><TextField 
-              type={this.state.type} 
-              id="outlined-basic" 
-              label="Password" 
-              name='password'
-              size='medium' 
-              fullWidth 
-              variant="outlined"
-              error={this.state.passwordError}
-              helperText={this.state.passwordError ? "Password is required" : ''}
-              onChange={(event) => this.changeState(event)} /></div>
+              <div className='l-row-in'><TextField
+                type={this.state.type}
+                id="outlined-basic"
+                label="Password"
+                name='password'
+                size='medium'
+                fullWidth
+                variant="outlined"
+                error={this.state.passwordError}
+                helperText={this.state.passwordError ? "Password is required" : ''}
+                onChange={(event) => this.changeState(event)} /></div>
             </div>
             <div className='row-pass'>
-              <div className='l-row-in'><TextField 
-              type={this.state.type} 
-              id="outlined-basic" 
-              label="Confirm" 
-              name='confirm'
-              size='medium' 
-              fullWidth 
-              variant="outlined"
-              error={this.state.confirmError}
-              helperText={this.state.confirmError ? "Confirm password is required" : ''}
-              onChange={(event) => this.changeState(event)} /></div>
+              <div className='l-row-in'><TextField
+                type={this.state.type}
+                id="outlined-basic"
+                label="Confirm"
+                name='confirm'
+                size='medium'
+                fullWidth
+                variant="outlined"
+                error={this.state.confirmError}
+                helperText={this.state.confirmError ? "Confirm password is required" : ''}
+                onChange={(event) => this.changeState(event)} /></div>
             </div>
             <div className='checkbox'>
               <FormControlLabel control={<Checkbox onChange={this.showPassword} />} label="Show Password" />

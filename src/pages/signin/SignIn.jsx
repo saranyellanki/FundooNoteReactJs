@@ -1,6 +1,9 @@
 import React from 'react';
 import { TextField, FormControlLabel, Checkbox } from '@mui/material';
 import './SignIn.scss'
+import UserService from '../../service/UserService';
+
+const userService = new UserService()
 
 class SignIn extends React.Component {
   constructor(props) {
@@ -37,8 +40,17 @@ class SignIn extends React.Component {
 
   next = () => {
     let isValidated = this.validation();
+    let data = {
+      "email": this.state.email,
+      "password": this.state.password
+    }
     if (!isValidated) {
-      console.log("Navigate");
+      userService.Signin(data)
+        .then((res) => {
+          console.log(res);
+        }).catch((err) => {
+          console.log(err);
+        })
     }
   }
 

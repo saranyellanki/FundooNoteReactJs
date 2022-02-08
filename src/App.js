@@ -11,8 +11,8 @@ function App() {
       {/* <SignUp /> */}
       {/* <SignIn /> */}
       {/* <ForgotPass /> */}
-      {/* <ResetPass /> */}
-      <MiniDrawer />
+      <ResetPass />
+      {/* <MiniDrawer /> */}
     </div>
   );
 }

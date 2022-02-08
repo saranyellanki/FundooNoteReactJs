@@ -1,6 +1,9 @@
 import React from 'react';
 import { Checkbox, FormControlLabel, TextField } from '@mui/material';
 import './SignUp.scss'
+import UserService from '../../service/UserService';
+
+const userService = new UserService();
 
 class SignUp extends React.Component {
     constructor(props) {
@@ -46,8 +49,19 @@ class SignUp extends React.Component {
 
     next = () => {
         let isValidated = this.validation();
-        if(!isValidated){
-            console.log("Navigate");
+        let data = {
+            "firstName": this.state.firstName,
+            "lastName": this.state.lastName,
+            "email": this.state.email,
+            "password": this.state.password
+        }
+        if (!isValidated) {
+            userService.Signup(data)
+            .then((res) => {
+                console.log(res.data);
+            }).catch((err) => {
+                console.log(err);
+            })
         }
     }
 
@@ -155,7 +169,7 @@ class SignUp extends React.Component {
                     </div>
                     <div className='right-container'>
                         <div className='logo'>
-                            <img src="https://ssl.gstatic.com/accounts/signup/glif/account.svg" alt="" width="244" height="244" class="j9NuTc TrZEUc" />
+                            <img src="https://ssl.gstatic.com/accounts/signup/glif/account.svg" alt="" width="244" height="244" />
                             <p> One account. All of Fundoo<br /> working for you. </p>
                         </div>
                     </div>
