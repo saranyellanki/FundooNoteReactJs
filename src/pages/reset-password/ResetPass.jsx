@@ -1,6 +1,7 @@
 import React from 'react';
 import { TextField, FormControlLabel, Checkbox } from '@mui/material';
 import './ResetPass.scss'
+import { Navigate } from 'react-router-dom';
 import UserService from '../../service/UserService';
 
 const userService = new UserService();
@@ -14,7 +15,8 @@ class ResetPass extends React.Component {
       confirm: '',
       passwordError: false,
       confirmError: false,
-      type: "password"
+      type: "password",
+      redirect: false
     };
   }
 
@@ -48,6 +50,9 @@ class ResetPass extends React.Component {
       userService.ResetPassword(data)
         .then((res) => {
           console.log(res.data);
+          this.setState({
+            redirect: true
+          })
         }).catch((err) => {
           console.log(err);
         })
@@ -64,6 +69,9 @@ class ResetPass extends React.Component {
   }
 
   render() {
+    if (this.state.redirect) {
+      return <Navigate to="/Signin" />
+    }
     return <div>
       <div className='m-container'>
         <div className='item-container'>

@@ -2,6 +2,7 @@ import React from 'react';
 import { TextField } from '@mui/material';
 import './ForgotPass.scss'
 import UserService from '../../service/UserService';
+import { Navigate } from 'react-router-dom';
 
 const userService = new UserService();
 
@@ -11,7 +12,7 @@ class ForgotPass extends React.Component {
 
     this.state = {
       email: '',
-      emailError: false
+      emailError: false,
     };
   }
 
@@ -42,9 +43,7 @@ class ForgotPass extends React.Component {
     if (!isValidated) {
       userService.forgotPass(data)
         .then((res) => {
-          localStorage.setItem("token", res.data.token)
           console.log(res.data);
-          return res.data.token;
         }).catch((err) => {
           console.log(err);
         })

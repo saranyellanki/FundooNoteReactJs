@@ -1,6 +1,7 @@
 import React from 'react';
 import { Checkbox, FormControlLabel, TextField } from '@mui/material';
 import './SignUp.scss'
+import { Link, Navigate } from 'react-router-dom';
 import UserService from '../../service/UserService';
 
 const userService = new UserService();
@@ -20,7 +21,8 @@ class SignUp extends React.Component {
             emailError: false,
             passwordError: false,
             confirmError: false,
-            type: "password"
+            type: "password",
+            redirect: false
         };
     }
 
@@ -59,6 +61,9 @@ class SignUp extends React.Component {
             userService.Signup(data)
             .then((res) => {
                 console.log(res.data);
+                this.setState({
+                    redirect: true
+                })
             }).catch((err) => {
                 console.log(err);
             })
@@ -75,6 +80,9 @@ class SignUp extends React.Component {
     }
 
     render() {
+        if(this.state.redirect){
+            return <Navigate to='/Signin'/>
+        }
         return <div>
             <div className='container'>
                 <div className='items-container'>
@@ -163,7 +171,7 @@ class SignUp extends React.Component {
                         <div className='row-button'>
                             <div className='btn-container'>
                                 <button onClick={this.next}>Next</button>
-                                <p>Sign in instead</p>
+                                <Link className='link' to='/Signin'>Sign in instead</Link>
                             </div>
                         </div>
                     </div>
