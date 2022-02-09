@@ -148,6 +148,7 @@ body {
     padding-bottom: 40px;
     flex-direction: row-reverse;
     justify-content: space-between;
+    align-items: center;
 }
 
 .btn-container button {
@@ -161,10 +162,11 @@ body {
     font-family: 'DM Sans', sans-serif;
 }
 
-.btn-container p {
+.link {
     font-size: 15px;
     font-weight: 500;
     color: #1a73e8;
+    text-decoration: none;
 }
 
 .btn-container button:hover {
@@ -172,7 +174,7 @@ body {
     background-color: #0a6ef1;
 }
 
-.btn-container p:hover {
+.link:hover {
     cursor: pointer;
     background-color: #eef1fd;
     border-radius: 3px;
