@@ -1,34 +1,25 @@
-import { Card, TextField } from '@mui/material';
+import { Card } from '@mui/material';
 import React from 'react';
 import Icons from '../icons/Icons';
 import './DisplayNote.scss'
 
-const DisplayNote = () => {
+const DisplayNote = (props) => {
 
 
   return <div className='allNotes'>
     <div className='noteBox-container'>
-        <Card>
-          <div>
-            <TextField
-              variant='standard'
-              placeholder='Title'
-              InputProps={{
-                disableUnderline: true,
-                style: { color: '#151515', fontFamily: 'DM Sans', fontWeight: 'normal' }
-              }} />
+        <Card style={{boxShadow: 'inset 0 0 1px 1px rgb(0 0 0 / 10%)'}}>
+          <div style={{padding:'10px 10px 0px 15px'}}>
+            <div>
+              {props.title}
+            </div>
           </div>
-          <div>
-            <TextField
-              variant='standard'
-              placeholder='My notes'
-              InputProps={{
-                disableUnderline: true,
-                style: { color: '#151515', fontFamily: 'DM Sans', fontWeight: 'normal' }
-              }}
-              multiline />
+          <div style={{padding:'10px 10px 0px 15px'}}>
+            <p>
+              {props.content}
+            </p>
           </div>
-          <div>
+          <div style={{display: 'flex',justifyContent: 'space-around',width: '100%'}}>
             <Icons />
           </div>
         </Card>
