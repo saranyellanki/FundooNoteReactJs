@@ -11,7 +11,6 @@
   justify-content: space-between;
   width: 40%;
   border-radius: 5px;
-  box-shadow: inset 0px 0px 2px 2px rgb(0 0 0 / 10%);
 }
 
 .cards-container {
@@ -31,25 +30,14 @@
   min-height: 30px;
 }
 
-.addnoteinput {
-  font-family: 'DM Sans';
-  ::placeholder{
-    font-weight: 600;
-  }
-}
 
 .icons-container {
   display: flex;
   width: 90%;
-  padding-left: 1%;
-  padding-bottom: 2%;
 }
 
-
 .addnotetext {
-  font-family: 'DM Sans';
   ::placeholder{
-    font-weight: 600;
     font-size: small;
   }
 }
@@ -58,21 +46,24 @@
   border: none;
   background-color: rgb(255, 255, 255);
   font-family: 'DM Sans';
-  font-size: 15px;
+  font-size: 16px;
   cursor: pointer;
-  padding: 2%;
+  padding: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 .btn-close:hover {
-  background-color: rgb(235, 235, 235);
-  border-radius: 4px;
+  background-color: rgb(243, 243, 243);
+  border-radius: 5px;
 }
 
 .footer-container {
   display: flex;
+  align-items: center;
 }
 
 .footer-button {
   display: flex;
-  align-items: center;
+  width: 85px;
 }
