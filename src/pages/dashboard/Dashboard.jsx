@@ -153,7 +153,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     transition: theme.transitions.create('width'),
     width: '100%',
     paddingTop: '13px',
-    fontFamily:'DM Sans',
+    fontFamily: 'DM Sans',
     [theme.breakpoints.up('md')]: {
       width: '20ch',
     },
@@ -163,9 +163,18 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export default function MiniDrawer() {
   const [open, setOpen] = React.useState(false);
 
+  const [notesArr, setNotesArr] = React.useState([]);
+
   const handleDrawerOpen = () => {
     setOpen(!open);
   };
+
+  const closeNote = (newNote) => {
+    // console.log(notesArr.arr);
+    setNotesArr(() => (
+      [...notesArr, newNote]
+    ))
+  }
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -224,8 +233,11 @@ export default function MiniDrawer() {
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
-        <TakeNote />
-        <DisplayNote />
+        <TakeNote closeBtn={closeNote} />
+        <div style={{ display: "flex", flexWrap: "wrap" }}>
+          {notesArr.length > 0 && notesArr.map((n, index) => (
+            <DisplayNote key={index} title={n.title} content={n.content} />
+          ))}</div>
       </Box>
     </Box>
   );
