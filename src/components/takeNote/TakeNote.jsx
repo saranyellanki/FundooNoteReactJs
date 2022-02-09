@@ -1,12 +1,12 @@
 import { BrushOutlined, CheckBoxOutlined, ImageOutlined } from '@mui/icons-material';
-import { IconButton, Input } from '@mui/material';
+import { IconButton, Input, Card } from '@mui/material';
 import React from 'react';
 import { useState } from 'react';
 import Icons from '../icons/Icons';
 import './TakeNote.scss'
 
 
-const TakeNote = () => {
+const TakeNote = (props) => {
 
   const [note, openNote] = useState(true);
 
@@ -19,6 +19,18 @@ const TakeNote = () => {
     openNote(!note)
   }
 
+  const saveNote = () => {
+    if (notes.title !== '' || notes.content !== '') {
+      props.closeBtn(notes);
+      setOpen()
+      setNotes({
+        title: '',
+        content: ''
+      })
+    }
+    setOpen()
+  }
+
   const onTextChange = (e) => {
     setNotes((prevData) => {
       return { ...prevData, [e.target.name]: e.target.value }
@@ -28,7 +40,7 @@ const TakeNote = () => {
   return <div className='note-container'>
     {
       note ?
-        <div className='card-container' onClick={() => setOpen()} >
+        <Card style={{ boxShadow: 'inset 0 0 1px 1px rgb(0 0 0 / 10%)' }} className='card-container' onClick={() => setOpen()} >
           <div className='input-container'>
             <div>
               <Input
@@ -36,6 +48,7 @@ const TakeNote = () => {
                 type='text'
                 placeholder='Take a note...'
                 disableUnderline
+                style={{ fontFamily: 'DM Sans' }}
               />
             </div>
           </div>
@@ -44,37 +57,41 @@ const TakeNote = () => {
             <IconButton><BrushOutlined /></IconButton>
             <IconButton><ImageOutlined /></IconButton>
           </div>
-        </div>
+        </Card>
         :
-        <div className='cards-container'>
+        <Card style={{ boxShadow: 'inset 0 0 1px 1px rgb(0 0 0 / 10%)' }} className='cards-container'>
           <div className='cardOpen'>
             <Input
               className='addnoteinput'
               type='text'
               placeholder='Title'
+              style={{ fontFamily: 'DM Sans' }}
               disableUnderline
-              onChange={(e) => onTextChange(e)}
-              name='title' />
+              onChange={onTextChange}
+              name='title'
+              value={notes.title} />
           </div>
           <div className='input-container'>
             <Input
               className='addnotetext'
               type='text'
               placeholder='Take a note...'
+              style={{ fontFamily: 'DM Sans' }}
               disableUnderline
               multiline
-              onChange={(e) => onTextChange(e)}
-              name='content' />
+              onChange={onTextChange}
+              name='content'
+              value={notes.content} />
           </div>
           <div className='footer-container'>
             <div className='icons-container'>
               <Icons />
             </div>
             <div className='footer-button'>
-              <button className='btn-close' onClick={() => setOpen()}>Close</button>
+              <button className='btn-close' onClick={() => saveNote()}>Close</button>
             </div>
           </div>
-        </div>
+        </Card>
     }
   </div >
 }
