@@ -9,7 +9,6 @@ const userService = new UserService();
 class SignUp extends React.Component {
     constructor(props) {
         super(props);
-
         this.state = {
             firstName: '',
             lastName: '',
@@ -24,6 +23,15 @@ class SignUp extends React.Component {
             type: "password",
             redirect: false
         };
+    }
+
+    showPassword = (event) => {
+        event.target.checked ?
+            this.setState({
+                type: "text"
+            }) : this.setState({
+                type: "password"
+            })
     }
 
     changeState = (event) => {
@@ -51,6 +59,7 @@ class SignUp extends React.Component {
 
     next = () => {
         let isValidated = this.validation();
+        console.log(this.state.firstName);
         let data = {
             "firstName": this.state.firstName,
             "lastName": this.state.lastName,
@@ -70,18 +79,9 @@ class SignUp extends React.Component {
         }
     }
 
-    showPassword = (event) => {
-        event.target.checked ?
-            this.setState({
-                type: "text"
-            }) : this.setState({
-                type: "password"
-            })
-    }
-
     render() {
         if(this.state.redirect){
-            return <Navigate to='/Signin'/>
+            return <Navigate to='/'/>
         }
         return <div>
             <div className='container'>
@@ -171,7 +171,7 @@ class SignUp extends React.Component {
                         <div className='row-button'>
                             <div className='btn-container'>
                                 <button onClick={this.next}>Next</button>
-                                <Link className='link' to='/Signin'>Sign in instead</Link>
+                                <Link className='link' to='/'>Sign in instead</Link>
                             </div>
                         </div>
                     </div>
