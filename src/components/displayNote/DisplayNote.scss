@@ -1,12 +1,16 @@
 .noteBox-container {
-  width: 240px;
-  border-radius: 5px;
-  box-shadow: inset 0px 0px 2px 2px rgb(0 0 0 / 10%);
+  width: 220px;
+  @media (max-width:600px) {
+    width: 600px;
+  }
 }
 
 .allNotes {
-  padding-top: 30px;
-  padding-left: 85px;
+  padding-left: 50px;
+  padding-bottom: 30px;
+  @media (max-width:600px) {
+    padding: 20px;
+  }
 }
 
 .textBox {
