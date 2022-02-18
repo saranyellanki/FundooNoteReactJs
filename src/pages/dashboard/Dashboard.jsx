@@ -252,8 +252,18 @@ export default function MiniDrawer() {
                   horizontal: 'left',
                 }}
               >
-                <div>
-                  <button onClick={signout}>Sign out</button>
+                <div className="profile-container">
+                  <div className="char-container">
+                    <div className="profile-char">{(localStorage.getItem("firstName").charAt(0).toUpperCase())}</div>
+                  </div>
+                  <div className="name-container">
+                    <div className="profile-name">{(localStorage.getItem("firstName") + " " + localStorage.getItem("lastName"))}</div>
+                  </div>
+                  <div className="email-container">
+                    <div className="profile-name">{(localStorage.getItem("email"))}</div>
+                  </div>
+                  <div className="add-account-container"><button className="add-account-btn" onClick={signout}>Add another account</button></div>
+                  <div className="signout-container"><button className="signout-btn" onClick={signout}>Sign out</button></div>
                 </div>
               </Popover>
             </div>
