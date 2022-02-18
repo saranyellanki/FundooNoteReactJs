@@ -1,46 +1,68 @@
 import { BrushOutlined, CheckBoxOutlined, ImageOutlined } from '@mui/icons-material';
-import { IconButton, Input, Card } from '@mui/material';
+import { Card, IconButton, Input } from '@mui/material';
 import React from 'react';
 import { useState } from 'react';
 import Icons from '../icons/Icons';
-import './TakeNote.scss'
+import './TakeNote.scss';
+import NoteService from '../../service/NotesService';
 
+
+const noteService = new NoteService();  
 
 const TakeNote = (props) => {
 
   const [note, openNote] = useState(true);
+  const [changeColor,setColor] = useState('#ffffff')
 
   const [notes, setNotes] = useState({
     title: '',
     content: ''
   });
 
+  const backgroundColor = (colorCode) => {
+    setColor(colorCode)
+  }
+
   const setOpen = () => {
     openNote(!note)
   }
 
   const saveNote = () => {
+    let data = {
+      "Title": notes.title,
+      "Description": notes.content,
+      "Color": changeColor,
+      "isArchieved": false,
+      "isDeleted": false
+    }
     if (notes.title !== '' || notes.content !== '') {
-      props.closeBtn(notes);
       setOpen()
+      noteService.addNote(data)
+      .then(res => {
+        props.closeBtn(notes);
+        console.log(res);
+      }).catch(err => {
+        console.log(err);
+      })
       setNotes({
         title: '',
         content: ''
       })
     }
     setOpen()
+    setColor('#ffffff')
   }
 
   const onTextChange = (e) => {
-    setNotes((prevData) => {
-      return { ...prevData, [e.target.name]: e.target.value }
-    })
+    setNotes(() => (
+      { ...notes, [e.target.name]: e.target.value }
+    ))
   }
 
   return <div className='note-container'>
     {
       note ?
-        <Card style={{ boxShadow: 'inset 0 0 1px 1px rgb(0 0 0 / 10%)' }} className='card-container' onClick={() => setOpen()} >
+        <Card style={{ boxShadow: '0 1px 7px rgb(134, 134, 134)'}} className='card-container' onClick={() => setOpen()} >
           <div className='input-container'>
             <div>
               <Input
@@ -59,7 +81,7 @@ const TakeNote = (props) => {
           </div>
         </Card>
         :
-        <Card style={{ boxShadow: 'inset 0 0 1px 1px rgb(0 0 0 / 10%)' }} className='cards-container'>
+        <Card style={{ boxShadow: 'inset 0 0 1px 1px rgb(0 0 0 / 10%)', backgroundColor: changeColor }} className='cards-container'>
           <div className='cardOpen'>
             <Input
               className='addnoteinput'
@@ -85,16 +107,15 @@ const TakeNote = (props) => {
           </div>
           <div className='footer-container'>
             <div className='icons-container'>
-              <Icons />
+              <Icons mode="create" colorChange={(colorCode) => backgroundColor(colorCode)} />
             </div>
             <div className='footer-button'>
-              <button className='btn-close' onClick={() => saveNote()}>Close</button>
+              <button className='btn-close' style={{ backgroundColor: changeColor }} onClick={() => saveNote()}>Close</button>
             </div>
           </div>
         </Card>
     }
   </div >
 }
-
 
 export default TakeNote;
