@@ -16,7 +16,8 @@ class SignIn extends React.Component {
       emailError: false,
       passwordError: false,
       type: "password",
-      redirect: false
+      redirect: false,
+      redirectSignup: false
     };
   }
 
@@ -50,13 +51,22 @@ class SignIn extends React.Component {
       userService.Signin(data)
         .then((res) => {
           console.log(res);
-          this.setState({
-            redirect: true
-          })
+          localStorage.setItem("token", res.data.token)
+          setTimeout(() => {
+            this.setState({
+              redirect: true
+            })
+          }, 2000);
         }).catch((err) => {
           console.log(err);
         })
     }
+  }
+
+  signup = () => {
+    this.setState({
+      redirectSignup: true
+    });
   }
 
   showPassword = (event) => {
@@ -71,6 +81,8 @@ class SignIn extends React.Component {
   render() {
     if (this.state.redirect) {
       return <Navigate to="/DashBoard" />
+    } else if (this.state.redirectSignup) {
+      return <Navigate to="/Signup" />
     }
     return <div>
       <div className='m-container'>
@@ -126,7 +138,7 @@ class SignIn extends React.Component {
             <div className='row'>
               <div className='btn-cont'>
                 <button onClick={this.next}>Next</button>
-                <p>Create Account</p>
+                <p style={{ cursor: "pointer" }} onClick={this.signup}>Create Account</p>
               </div>
             </div>
           </div>
