@@ -1,5 +1,5 @@
 import * as React from "react";
-import { styled, useTheme } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
 import MuiAppBar from "@mui/material/AppBar";
@@ -10,8 +10,6 @@ import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
@@ -22,11 +20,13 @@ import ArchiveOutlinedIcon from '@mui/icons-material/ArchiveOutlined';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import SearchIcon from '@mui/icons-material/Search';
 import InputBase from '@mui/material/InputBase';
-import { alpha } from "@mui/material";
+import { alpha, Popover } from "@mui/material";
 import { AccountCircleOutlined, AppsOutlined, RefreshOutlined, SettingsOutlined, ViewStreamOutlined } from "@mui/icons-material";
 import './Dashboard.scss'
-import TakeNote from "../../components/takeNote/TakeNote";
-import DisplayNote from "../../components/displayNote/DisplayNote";
+import Notes from "../notes/Notes";
+import { Route, Routes, useNavigate } from "react-router";
+import Archive from "../archive/Archive";
+import Trash from "../trash/Trash";
 
 
 const drawerWidth = 240;
@@ -161,19 +161,46 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function MiniDrawer() {
-  const [open, setOpen] = React.useState(false);
 
-  const [notesArr, setNotesArr] = React.useState([]);
+  const navigate = useNavigate();
+  const [open, setOpen] = React.useState(false);
+  const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleDrawerOpen = () => {
     setOpen(!open);
   };
 
-  const closeNote = (newNote) => {
-    // console.log(notesArr.arr);
-    setNotesArr(() => (
-      [...notesArr, newNote]
-    ))
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const open1 = Boolean(anchorEl);
+  const id = open1 ? 'simple-popover' : undefined;
+
+  const signout = () => {
+    localStorage.clear();
+    navigate('/');
+  }
+
+  const changeRoute = (route) => {
+    switch (route) {
+      case 'Archive':
+        navigate('archive')
+        break;
+      case 'Notes':
+        navigate('')
+        break;
+      case 'Bin':
+        navigate('trash')
+        break;
+      default:
+        navigate('')
+        break;
+    }
   }
 
   return (
@@ -212,9 +239,23 @@ export default function MiniDrawer() {
               <IconButton>
                 <AppsOutlined />
               </IconButton>
-              <IconButton>
+              <IconButton onClick={handleClick} >
                 <AccountCircleOutlined />
               </IconButton>
+              <Popover
+                id={id}
+                open={open1}
+                anchorEl={anchorEl}
+                onClose={handleClose}
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'left',
+                }}
+              >
+                <div>
+                  <button onClick={signout}>Sign out</button>
+                </div>
+              </Popover>
             </div>
           </Toolbar>
         </AppBar>
@@ -224,7 +265,7 @@ export default function MiniDrawer() {
         <Divider />
         <List>
           {menuList.map((item) => (
-            <ListItem button key={item.text} >
+            <ListItem button key={item.text} onClick={() => changeRoute(item.text)}>
               <ListItemIcon>{item.icon}</ListItemIcon>
               <ListItemText primary={item.text} />
             </ListItem>
@@ -233,11 +274,11 @@ export default function MiniDrawer() {
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
-        <TakeNote closeBtn={closeNote} />
-        <div style={{ display: "flex", flexWrap: "wrap" }}>
-          {notesArr.length > 0 && notesArr.map((n, index) => (
-            <DisplayNote key={index} title={n.title} content={n.content} />
-          ))}</div>
+        <Routes>
+          <Route path="" element={<Notes />} />
+          <Route path="archive" element={<Archive />} />
+          <Route path="trash" element={<Trash />} />
+        </Routes>
       </Box>
     </Box>
   );
