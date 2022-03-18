@@ -16,11 +16,11 @@ Dialog.propTypes = {
 const DisplayNote = (props) => {
 
   const [open, setOpen] = React.useState(false);
-  const [color,setcolor] = React.useState(props.arrNote.Color)
+  const [color,setcolor] = React.useState(props.color)
 
   const [dialogNote, dialogSetNotes] = React.useState({
-    title: props.arrNote.Title,
-    content: props.arrNote.Description
+    title: props.title,
+    content: props.description,
   });
 
   const onTextChange = (e) => {
@@ -36,12 +36,15 @@ const DisplayNote = (props) => {
 
   const addArchive = () => {
     let data = {
-      "_id" : props.arrNote._id,
-      "isArchieved" : true
+      "_id" : props.id,
+      "Title": props.title,
+      "Description": props.description,
+      "Color": props.color,
+      "isArchieved" : `${!(props.archive)}`,
+      "isDeleted": props.trash
     }
     noteService.updateNote(data)
     .then((res) => {
-      console.log(res.data);
       props.getNotes();
     }).catch((err) => {
       console.log(err);
@@ -50,8 +53,12 @@ const DisplayNote = (props) => {
 
   const noteDelete = () => {
     let data = {
-      "_id" : props.arrNote._id,
-      "isDeleted" : true
+      "_id" : props.id,
+      "Title": props.title,
+      "Description": props.description,
+      "Color": props.color,
+      "isArchieved" : props.archive,
+      "isDeleted": `${!(props.trash)}`,
     }
     noteService.updateNote(data)
     .then((res) => {
@@ -69,9 +76,9 @@ const DisplayNote = (props) => {
   const handleClose = () => {
     setOpen(false);
     let data = {
+      "_id": props.id,
       "Title": dialogNote.title,
       "Description": dialogNote.content,
-      "_id": props.arrNote._id,
     }
     noteService.updateNote(data)
     .then((res) => {
@@ -83,23 +90,23 @@ const DisplayNote = (props) => {
 
   return <div className='allNotes'>
     <div className='noteBox-container'>
-      <Card style={{ boxShadow: 'inset 0 0 1px 1px rgb(0 0 0 / 10%)', backgroundColor: color }}>
+      <Card style={{ boxShadow: 'inset 0 0 1px 1px rgb(0 0 0 / 10%)', backgroundColor: props.color }}>
         <div style={{ padding: '10px' }} onClick={handleClickOpen}>
           <div>
-            {props.arrNote.Title}
+            {props.title}
           </div>
         </div>
         <div style={{ padding: '10px' }} onClick={handleClickOpen}>
           <p>
-            {props.arrNote.Description}
+            {props.description}
           </p>
         </div>
         <div style={{ display: 'flex', justifyContent: 'space-around', width: '100%' }}>
-          <Icons mode='update' updateMode={(data) => changeColor(data.Color)} addArchive={addArchive} noteDelete={noteDelete} arrId={props.arrNote._id}/>
+          <Icons mode='update' updateMode={(data) => changeColor(data.Color)} addArchive={addArchive} noteDelete={noteDelete} arrId={props.id}/>
         </div>
       </Card>
       <Dialog onClose={handleClose} open={open}>
-        <Card style={{ boxShadow: '0 1px 7px rgb(134, 134, 134)', backgroundColor: color }} className='cards-container'>
+        <Card style={{ boxShadow: '0 1px 7px rgb(134, 134, 134)', backgroundColor: props.color }} className='cards-container'>
           <div className='cardOpen'>
             <Input
               className='addnoteinput'
@@ -125,10 +132,10 @@ const DisplayNote = (props) => {
           </div>
           <div className='footer-container'>
             <div className='icons-container'>
-              <Icons mode='update' updateMode={(data) => changeColor(data.Color)} addArchive={addArchive} arrId={props.arrNote._id}/>
+              <Icons mode='update' updateMode={(data) => changeColor(data.Color)} addArchive={addArchive} noteDelete={noteDelete} arrId={props.id} />
             </div>
             <div className='footer-button'>
-              <button className='btn-close' style={{backgroundColor:color}} onClick={handleClose}>Close</button>
+              <button className='btn-close' style={{backgroundColor:props.color}} onClick={handleClose}>Close</button>
             </div>
           </div>
         </Card>
